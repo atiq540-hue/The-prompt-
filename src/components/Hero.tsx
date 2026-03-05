@@ -124,13 +124,13 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#020617] pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 pt-20">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-0 pointer-events-none opacity-40"
       />
       
-      <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#020617]/40 to-[#020617] z-1" />
+      <div className="absolute inset-0 bg-radial-gradient from-transparent via-slate-950/40 to-slate-950 z-1" />
 
       <div className="container mx-auto px-6 relative z-10 text-center">
         <motion.div

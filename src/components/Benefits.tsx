@@ -16,7 +16,7 @@ export const Benefits = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#020617]">
+    <section className="py-24 bg-slate-950">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 max-w-6xl mx-auto">
           <div>

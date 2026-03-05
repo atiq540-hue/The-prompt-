@@ -4,7 +4,7 @@ import { Send, Phone } from 'lucide-react';
 
 export const FinalCTA = () => {
   return (
-    <section className="py-16 md:py-24 bg-[#020617] relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-slate-950 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           <motion.div
@@ -39,7 +39,7 @@ export const FinalCTA = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="p-6 sm:p-10 rounded-[40px] bg-[#0f172a] border border-slate-800 shadow-2xl relative"
+            className="p-6 sm:p-10 rounded-[40px] bg-slate-900 border border-slate-800 shadow-2xl relative"
           >
             <div className="absolute -top-6 -right-6 w-24 h-24 bg-sky-500/10 rounded-full blur-3xl" />
             <h3 className="text-2xl font-bold text-white mb-8">Send a quick brief</h3>

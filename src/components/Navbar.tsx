@@ -25,7 +25,7 @@ export const Navbar = () => {
     <nav 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-[#020617]/80 backdrop-blur-lg border-b border-white/10 py-3' 
+          ? 'bg-slate-950/80 backdrop-blur-lg border-b border-white/10 py-3' 
           : 'bg-transparent py-5'
       }`}
     >
@@ -76,7 +76,7 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#0f172a] border-b border-white/10 overflow-hidden"
+            className="md:hidden bg-slate-900 border-b border-white/10 overflow-hidden"
           >
             <div className="container mx-auto px-6 py-8 flex flex-col gap-6">
               {navLinks.map((link) => (

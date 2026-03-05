@@ -25,7 +25,7 @@ export const Portfolio = () => {
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-[#0f172a]">
+    <section className="py-20 md:py-32 bg-slate-900">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-20 gap-8 text-center lg:text-left">
           <div className="max-w-2xl">
@@ -55,7 +55,7 @@ export const Portfolio = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
               <div className="space-y-4 px-2">
                 <div className="text-sky-400 text-sm font-black uppercase tracking-[0.2em]">{project.category}</div>

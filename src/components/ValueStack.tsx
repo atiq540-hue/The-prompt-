@@ -19,7 +19,7 @@ export const ValueStack = () => {
   ];
 
   return (
-    <div className="bg-[#0f172a] border-y border-slate-800 py-10 md:py-12">
+    <div className="bg-slate-900 border-y border-slate-800 py-10 md:py-12">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16">
           {items.map((item, index) => (
