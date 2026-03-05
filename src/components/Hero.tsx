@@ -124,13 +124,13 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-800 pt-20">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-0 pointer-events-none opacity-40"
       />
       
-      <div className="absolute inset-0 bg-radial-gradient from-transparent via-slate-950/40 to-slate-950 z-1" />
+      <div className="absolute inset-0 bg-radial-gradient from-transparent via-slate-800/40 to-slate-800 z-1" />
 
       <div className="container mx-auto px-6 relative z-10 text-center">
         <motion.div
@@ -159,7 +159,7 @@ export const Hero = () => {
             </a>
             <a 
               href="#portfolio"
-              className="w-full sm:w-auto px-10 py-5 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-bold text-lg transition-all border border-slate-800 flex items-center justify-center"
+              className="w-full sm:w-auto px-10 py-5 bg-slate-700 hover:bg-slate-600 text-white rounded-2xl font-bold text-lg transition-all border border-slate-600 flex items-center justify-center"
             >
               See my work
             </a>

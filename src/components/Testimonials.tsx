@@ -22,7 +22,7 @@ export const Testimonials = () => {
   ];
 
   return (
-    <section className="py-24 bg-slate-950">
+    <section className="py-24 bg-slate-800">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((t, index) => (
@@ -32,7 +32,7 @@ export const Testimonials = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="p-8 rounded-3xl bg-slate-900 border border-slate-800 relative"
+              className="p-8 rounded-3xl bg-slate-700 border border-slate-600 relative"
             >
               <Quote className="w-10 h-10 text-sky-500/20 absolute top-6 right-8" />
               <p className="text-slate-300 mb-8 italic leading-relaxed">"{t.content}"</p>

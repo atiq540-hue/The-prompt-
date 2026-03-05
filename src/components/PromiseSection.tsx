@@ -56,7 +56,7 @@ export const PromiseSection = () => {
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-blue-mesh-10531-preview.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-700/60 via-transparent to-transparent pointer-events-none" />
               
               {/* Decorative elements */}
               <div className="absolute top-6 left-6 flex gap-1.5">
