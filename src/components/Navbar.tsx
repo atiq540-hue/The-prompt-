@@ -21,6 +21,27 @@ export const Navbar = () => {
     { name: 'FAQ', href: '#faq' },
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    
+    if (element) {
+      const offset = 80; // Height of the fixed navbar
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <nav 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -42,7 +63,8 @@ export const Navbar = () => {
           {navLinks.map((link) => (
             <a 
               key={link.name} 
-              href={link.href} 
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
             >
               {link.name}
@@ -82,7 +104,7 @@ export const Navbar = () => {
                 <a 
                   key={link.name} 
                   href={link.href} 
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="text-lg font-medium text-slate-300 hover:text-white transition-colors"
                 >
                   {link.name}
