@@ -39,19 +39,11 @@ export default function App() {
       <Problem />
       <PromiseSection />
       <AIDemo />
-      <div id="how-it-works">
-        <HowItWorks />
-      </div>
-      <div id="benefits">
-        <Benefits />
-      </div>
-      <div id="portfolio">
-        <Portfolio />
-      </div>
+      <HowItWorks />
+      <Benefits />
+      <Portfolio />
       <Testimonials />
-      <div id="faq">
-        <FAQ />
-      </div>
+      <FAQ />
       <Scarcity />
       <FinalCTA />
       <Footer />

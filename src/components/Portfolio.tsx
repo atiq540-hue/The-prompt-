@@ -25,7 +25,7 @@ export const Portfolio = () => {
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-slate-700">
+    <section id="portfolio" className="py-20 md:py-32 bg-slate-700">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-20 gap-8 text-center lg:text-left">
           <div className="max-w-2xl">

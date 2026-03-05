@@ -10,6 +10,10 @@
     scroll-behavior: smooth;
     @apply bg-slate-800;
   }
+
+  [id] {
+    scroll-margin-top: 100px;
+  }
   
   body {
     @apply font-sans antialiased bg-slate-800 text-slate-50;

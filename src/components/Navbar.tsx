@@ -29,16 +29,10 @@ export const Navbar = () => {
     const element = document.getElementById(targetId);
     
     if (element) {
-      const offset = 80; // Height of the fixed navbar
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      // Small delay to ensure the menu closing doesn't interfere with scrolling
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
   };
 
