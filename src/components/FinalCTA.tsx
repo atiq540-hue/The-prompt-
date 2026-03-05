@@ -14,7 +14,7 @@ export const FinalCTA = () => {
             className="text-center lg:text-left"
           >
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">Ready to get a site that works?</h2>
-            <p className="text-lg md:text-2xl text-slate-400 mb-10 leading-relaxed">
+            <p className="text-lg md:text-2xl text-slate-200 mb-10 leading-relaxed">
               Stop losing customers to a bad website. Let's build something that <span className="text-white font-bold italic">actually converts.</span>
             </p>
             

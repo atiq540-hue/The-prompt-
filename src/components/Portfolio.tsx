@@ -7,19 +7,19 @@ export const Portfolio = () => {
     {
       title: "Modern Dental Clinic",
       result: "+30% leads in first month",
-      image: "https://picsum.photos/seed/dental/600/400",
+      image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=600&h=400",
       category: "Healthcare"
     },
     {
       title: "Eco-Friendly Coffee",
       result: "40% increase in online orders",
-      image: "https://picsum.photos/seed/coffee/600/400",
+      image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=600&h=400",
       category: "E-commerce"
     },
     {
       title: "Legal Consulting Firm",
       result: "2x faster page load speed",
-      image: "https://picsum.photos/seed/legal/600/400",
+      image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=600&h=400",
       category: "Professional Services"
     }
   ];
@@ -30,7 +30,7 @@ export const Portfolio = () => {
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-20 gap-8 text-center lg:text-left">
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">Real results for real businesses</h2>
-            <p className="text-lg md:text-xl text-slate-400">I build outcomes, not just websites. Here are a few recent launches.</p>
+            <p className="text-lg md:text-xl text-slate-200">I build outcomes, not just websites. Here are a few recent launches.</p>
           </div>
           <button className="w-full sm:w-auto px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-3 border border-slate-700">
             See full case study

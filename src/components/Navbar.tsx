@@ -35,7 +35,6 @@ export const Navbar = () => {
             <span className="text-white text-xs font-black">PA</span>
           </div>
           <span className="hidden sm:inline">The Prompt <span className="text-sky-400">Architect</span></span>
-          <span className="sm:hidden text-sky-400">PA</span>
         </div>
         
         {/* Desktop Nav */}

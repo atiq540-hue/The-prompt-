@@ -143,7 +143,7 @@ export const Hero = () => {
             <span className="text-sky-400 italic font-serif">Designed to convert.</span>
           </h1>
           
-          <p className="text-lg md:text-2xl text-slate-400 mb-10 max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-lg md:text-2xl text-slate-200 mb-10 max-w-3xl mx-auto font-light leading-relaxed">
             I’m a solo founder who builds high-converting sites for small businesses — <span className="text-white font-medium">fast, affordable, and powered by AI strategy.</span>
           </p>
 

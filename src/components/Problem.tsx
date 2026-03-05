@@ -15,7 +15,7 @@ export const Problem = () => {
             Tired of expensive agencies or DIY sites that don’t convert?
           </h2>
           
-          <div className="space-y-6 text-lg text-slate-400 leading-relaxed">
+          <div className="space-y-6 text-lg text-slate-200 leading-relaxed">
             <p>
               You need a website that brings clients — not another design experiment. Most small businesses get stuck between overpaying for bloated agency services or struggling with DIY tools that look "okay" but fail to sell.
             </p>

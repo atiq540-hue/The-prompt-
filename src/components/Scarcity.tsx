@@ -15,7 +15,7 @@ export const Scarcity = () => {
             <p className="text-sky-100">Only 5 spots left for March to keep quality high.</p>
           </div>
           <div className="md:ml-12">
-            <div className="px-4 py-2 bg-white text-sky-600 rounded-full text-sm font-bold uppercase tracking-wider">
+            <div className="px-4 py-2 bg-sky-900 text-white rounded-full text-sm font-bold uppercase tracking-wider border border-sky-400/30">
               Next available: March 15th
             </div>
           </div>
