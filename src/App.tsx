@@ -32,7 +32,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 selection:bg-sky-500/30">
+    <div className="min-h-screen bg-[#020617] text-slate-50 selection:bg-sky-500/30">
       <Navbar />
       <Hero />
       <ValueStack />

@@ -25,7 +25,7 @@ export const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-20 md:py-32 bg-slate-950">
+    <section className="py-20 md:py-32 bg-[#020617]">
       <div className="container mx-auto px-6 max-w-4xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">Common Questions</h2>
@@ -38,8 +38,8 @@ export const FAQ = () => {
               key={index} 
               className={`rounded-3xl border transition-all duration-300 ${
                 openIndex === index 
-                  ? 'bg-slate-900 border-sky-500/30' 
-                  : 'bg-slate-900/40 border-slate-800 hover:border-slate-700'
+                  ? 'bg-[#0f172a] border-sky-500/30' 
+                  : 'bg-[#0f172a]/40 border-slate-800 hover:border-slate-700'
               }`}
             >
               <button

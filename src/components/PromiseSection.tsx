@@ -4,7 +4,7 @@ import { Sparkles } from 'lucide-react';
 
 export const PromiseSection = () => {
   return (
-    <section className="py-16 md:py-24 bg-slate-900 relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-[#0f172a] relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sky-500 rounded-full blur-[120px]" />
       </div>

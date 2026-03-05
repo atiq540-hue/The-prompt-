@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 
 export const Problem = () => {
   return (
-    <section className="py-24 bg-slate-950">
+    <section className="py-24 bg-[#020617]">
       <div className="container mx-auto px-6 max-w-4xl text-center">
         <motion.div
           initial={{ opacity: 0 }}

@@ -76,7 +76,7 @@ export const AIDemo = () => {
   };
 
   return (
-    <section className="py-24 bg-slate-900 border-y border-slate-800">
+    <section className="py-24 bg-[#0f172a] border-y border-slate-800">
       <div className="container mx-auto px-6 max-w-5xl">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-4">
@@ -89,9 +89,9 @@ export const AIDemo = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 bg-slate-950 p-5 sm:p-8 rounded-[32px] border border-slate-800 shadow-2xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 bg-[#020617] p-5 sm:p-8 rounded-[32px] border border-slate-800 shadow-2xl">
           <div className="space-y-6">
-            <div className="aspect-square rounded-2xl bg-slate-900 border-2 border-dashed border-slate-800 flex flex-col items-center justify-center relative overflow-hidden group">
+            <div className="aspect-square rounded-2xl bg-[#0f172a] border-2 border-dashed border-slate-800 flex flex-col items-center justify-center relative overflow-hidden group">
               {image ? (
                 <>
                   <img src={image} alt="Original" className="w-full h-full object-contain" />
@@ -119,7 +119,7 @@ export const AIDemo = () => {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="e.g., 'Add a retro filter', 'Make it a sunset scene', 'Add a robot in the background'"
-                  className="w-full bg-slate-900 border border-slate-800 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-sky-500 transition-colors h-32 resize-none text-base"
+                  className="w-full bg-[#0f172a] border border-slate-800 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-sky-500 transition-colors h-32 resize-none text-base"
                 />
                 <div className="absolute bottom-3 right-3 text-[10px] text-slate-600 uppercase font-bold tracking-widest">
                   AI Prompt
@@ -145,7 +145,7 @@ export const AIDemo = () => {
             </div>
           </div>
 
-          <div className="aspect-square rounded-2xl bg-slate-900 border border-slate-800 flex flex-col items-center justify-center relative overflow-hidden">
+          <div className="aspect-square rounded-2xl bg-[#0f172a] border border-slate-800 flex flex-col items-center justify-center relative overflow-hidden">
             <AnimatePresence mode="wait">
               {result ? (
                 <motion.div 
