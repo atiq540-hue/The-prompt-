@@ -1,17 +1,17 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Heart, Zap, Shield, Smartphone, Search, Settings } from 'lucide-react';
+import { Heart, Zap, Shield, Smartphone, Rocket, Settings, TrendingUp } from 'lucide-react';
 
 export const Benefits = () => {
   const emotional = [
     { icon: <Heart className="w-6 h-6" />, title: "More time back", desc: "Focus on running your business while your site works for you." },
-    { icon: <Zap className="w-6 h-6" />, title: "High conversion", desc: "A site that actually turns visitors into paying clients." },
+    { icon: <TrendingUp className="w-6 h-6" />, title: "High conversion", desc: "A site that actually turns visitors into paying clients." },
     { icon: <Shield className="w-6 h-6" />, title: "Earn trust", desc: "A professional presence that builds immediate credibility." }
   ];
 
   const functional = [
     { icon: <Smartphone className="w-6 h-6" />, title: "Mobile-first", desc: "Perfectly optimized for every screen size." },
-    { icon: <Search className="w-6 h-6" />, title: "SEO-ready", desc: "Fast load times and basic SEO installed out of the box." },
+    { icon: <Rocket className="w-6 h-6" />, title: "Lightning fast", desc: "Optimized for speed to keep your visitors engaged." },
     { icon: <Settings className="w-6 h-6" />, title: "Low maintenance", desc: "Simple instructions included for easy updates." }
   ];
 
