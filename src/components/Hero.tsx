@@ -2,7 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 
+import { useLanguage } from '../contexts/LanguageContext';
+
 export const Hero = () => {
+  const { t, isRTL } = useLanguage();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -124,48 +127,94 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-800 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900 pt-20">
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 z-0 pointer-events-none opacity-40"
+        className="absolute inset-0 z-0 pointer-events-none opacity-60"
       />
       
-      <div className="absolute inset-0 bg-radial-gradient from-transparent via-slate-800/40 to-slate-800 z-1" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(15,23,42,0.8)_100%)] z-1" />
 
       <div className="container mx-auto px-6 relative z-10 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 tracking-tight leading-[1.1]">
-            Websites built with AI.<br />
-            <span className="text-sky-400 italic font-serif">Designed to convert.</span>
-          </h1>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 1, ease: "easeOut" }}
+          >
+            <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-white mb-8 tracking-tighter leading-[0.9] uppercase">
+              {t('hero.title')}<br />
+              <motion.span 
+                initial={{ opacity: 0, x: isRTL ? 40 : -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 1, ease: "easeOut" }}
+                className="text-sky-500 italic font-serif inline-block lowercase tracking-normal"
+              >
+                {t('hero.titleAccent')}
+              </motion.span>
+            </h1>
+          </motion.div>
           
-          <p className="text-lg md:text-2xl text-slate-200 mb-10 max-w-3xl mx-auto font-light leading-relaxed">
-            I’m a solo founder who builds high-converting sites for small businesses — <span className="text-white font-medium">fast, affordable, and powered by AI strategy.</span>
-          </p>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 1 }}
+            className="text-xl md:text-3xl text-slate-400 mb-12 max-w-4xl mx-auto font-light leading-relaxed tracking-tight"
+          >
+            {t('hero.subtitle')}
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-            <a 
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 1 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-6"
+          >
+            <motion.a 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               href="https://wa.me/923278651402?text=Hi! I'm interested in starting a project with The Prompt Architect."
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-10 py-5 bg-sky-500 hover:bg-sky-400 text-white rounded-2xl font-bold text-lg transition-all transform hover:scale-105 shadow-xl shadow-sky-500/25 flex items-center justify-center gap-3"
+              className="w-full sm:w-auto px-12 py-6 bg-sky-500 hover:bg-sky-400 text-white rounded-[24px] font-black text-xl transition-all shadow-2xl shadow-sky-500/30 flex items-center justify-center gap-4 active:scale-95 uppercase tracking-widest"
             >
-              Chat with the Architect
-              <ArrowRight className="w-5 h-5" />
-            </a>
-            <a 
+              {t('hero.ctaChat')}
+              <ArrowRight className={`w-6 h-6 ${isRTL ? 'rotate-180' : ''}`} />
+            </motion.a>
+            <motion.a 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               href="#portfolio"
-              className="w-full sm:w-auto px-10 py-5 bg-slate-700 hover:bg-slate-600 text-white rounded-2xl font-bold text-lg transition-all border border-slate-600 flex items-center justify-center"
+              className="w-full sm:w-auto px-12 py-6 bg-slate-800/50 hover:bg-slate-800 text-white rounded-[24px] font-black text-xl transition-all border border-white/10 flex items-center justify-center active:scale-95 uppercase tracking-widest backdrop-blur-sm"
             >
-              See my work
-            </a>
-          </div>
+              {t('hero.ctaWork')}
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
+      
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10"
+      >
+        <motion.div
+          animate={{ y: [0, 15, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          className="w-8 h-14 border-2 border-white/10 rounded-full flex justify-center p-2 backdrop-blur-sm"
+        >
+          <motion.div 
+            animate={{ opacity: [0.2, 1, 0.2] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-1.5 h-3 bg-sky-500 rounded-full" 
+          />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

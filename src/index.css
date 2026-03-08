@@ -1,14 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-display: "Space Grotesk", sans-serif;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    @apply bg-slate-800;
+    @apply bg-slate-900;
+    -webkit-tap-highlight-color: transparent;
   }
 
   [id] {
@@ -16,22 +19,26 @@
   }
   
   body {
-    @apply font-sans antialiased bg-slate-800 text-slate-50;
+    @apply font-sans antialiased bg-slate-900 text-slate-50;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::selection {
+    @apply bg-sky-500/30 text-white;
   }
 
   /* Custom scrollbar */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-slate-800;
+    @apply bg-slate-900;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-600 rounded-full border-2 border-slate-800;
+    @apply bg-slate-800 rounded-full border border-white/5;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-500;
+    @apply bg-sky-500/50;
   }
 }
 
