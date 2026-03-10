@@ -8,15 +8,15 @@ export const ValueStack = () => {
   const { t, isRTL } = useLanguage();
   const items = [
     {
-      icon: <Rocket className="w-6 h-6 text-sky-500" />,
+      icon: Rocket,
       text: t('valueStack.items.0')
     },
     {
-      icon: <Target className="w-6 h-6 text-sky-500" />,
+      icon: Target,
       text: t('valueStack.items.1')
     },
     {
-      icon: <Wallet className="w-6 h-6 text-sky-500" />,
+      icon: Wallet,
       text: t('valueStack.items.2')
     }
   ];
@@ -38,7 +38,7 @@ export const ValueStack = () => {
             >
               <div className="w-16 h-16 flex-shrink-0 bg-slate-800 rounded-[24px] flex items-center justify-center group-hover:bg-sky-500 group-hover:text-white transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-xl">
                 <div className="group-hover:text-white transition-colors duration-500">
-                  {React.cloneElement(item.icon as React.ReactElement, { className: "w-8 h-8" })}
+                  <item.icon className="w-8 h-8" />
                 </div>
               </div>
               <span className={`text-slate-400 font-black text-xl md:text-lg lg:text-xl leading-tight group-hover:text-white transition-all duration-500 tracking-tight ${isRTL ? 'text-right' : 'text-left'}`}>
