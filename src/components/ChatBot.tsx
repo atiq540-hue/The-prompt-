@@ -83,6 +83,7 @@ export const ChatBot = () => {
 
     try {
       if (!process.env.GEMINI_API_KEY) {
+        console.error('GEMINI_API_KEY is missing from process.env');
         setMessages(prev => [...prev, { 
           role: 'model', 
           text: language === 'ur' 
@@ -95,7 +96,7 @@ export const ChatBot = () => {
 
       const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
       const chat = ai.chats.create({
-        model: "gemini-3.1-pro-preview",
+        model: "gemini-flash-latest",
         config: {
           systemInstruction: systemInstruction,
           tools: [summarizeLeadTool],
@@ -109,7 +110,7 @@ export const ChatBot = () => {
       const response = await chat.sendMessage({ message: userMessage });
       
       // Handle function calls
-      if (response.functionCalls) {
+      if (response.functionCalls && response.functionCalls.length > 0) {
         for (const call of response.functionCalls) {
           if (call.name === 'summarize_lead') {
             setLeadData(call.args as unknown as LeadData);
@@ -120,15 +121,31 @@ export const ChatBot = () => {
                 ? "میں نے آپ کی معلومات کا خلاصہ تیار کر لیا ہے۔ کیا آپ چاہیں گے کہ میں اسے آرکیٹیکٹ کو بھیج دوں؟"
                 : "I have prepared a summary of your information. Would you like me to send it to the Architect?"
             });
-            setMessages(prev => [...prev, { role: 'model', text: toolResponse.text }]);
+            setMessages(prev => [...prev, { role: 'model', text: toolResponse.text || '' }]);
           }
         }
-      } else {
+      } else if (response.text) {
         setMessages(prev => [...prev, { role: 'model', text: response.text }]);
+      } else {
+        throw new Error("Empty response from AI");
       }
-    } catch (error) {
-      console.error('Chat Error:', error);
-      setMessages(prev => [...prev, { role: 'model', text: language === 'ur' ? 'معذرت، رابطہ کرنے میں مسئلہ ہوا۔ براہ کرم دوبارہ کوشش کریں۔' : 'Sorry, I am having trouble connecting. Please try again in a moment.' }]);
+    } catch (error: any) {
+      console.error('Detailed Chat Error:', error);
+      const errorMessage = error?.message || String(error);
+      let userDisplayError = language === 'ur' 
+        ? 'معذرت، رابطہ کرنے میں مسئلہ ہوا۔' 
+        : 'Sorry, I am having trouble connecting.';
+      
+      if (errorMessage.includes('API_KEY_INVALID') || errorMessage.includes('API key not found')) {
+        userDisplayError += language === 'ur'
+          ? ' آپ کا API Key درست نہیں لگ رہا۔ براہ کرم سیٹنگز میں چیک کریں۔'
+          : ' Your API Key seems invalid. Please check your settings.';
+      } else {
+        // Add a hint of the error for the user to help us debug
+        userDisplayError += ` (Error: ${errorMessage.substring(0, 50)}...)`;
+      }
+      
+      setMessages(prev => [...prev, { role: 'model', text: userDisplayError }]);
     } finally {
       setLoading(false);
     }

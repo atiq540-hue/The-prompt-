@@ -124,30 +124,37 @@ export const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden absolute top-full left-0 w-full bg-slate-900/95 backdrop-blur-2xl border-b border-white/5 overflow-hidden shadow-2xl"
           >
             <div className="container mx-auto px-6 py-12 flex flex-col gap-8">
-              {navLinks.map((link) => (
-                <a 
+              {navLinks.map((link, index) => (
+                <motion.a 
                   key={link.name} 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
                   href={link.href} 
                   onClick={(e) => handleNavClick(e, link.href)}
                   className="text-2xl font-black text-white hover:text-sky-400 transition-colors uppercase tracking-tighter"
                 >
                   {link.name}
-                </a>
+                </motion.a>
               ))}
-              <a 
+              <motion.a 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navLinks.length * 0.1 }}
                 href="https://wa.me/923278651402" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-full py-5 bg-sky-500 text-white rounded-[24px] text-center font-black text-lg shadow-xl shadow-sky-500/20 uppercase tracking-widest"
               >
                 {t('nav.chatWithArchitect')}
-              </a>
+              </motion.a>
             </div>
           </motion.div>
         )}

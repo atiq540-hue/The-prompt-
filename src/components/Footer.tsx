@@ -16,9 +16,9 @@ export const Footer = () => {
           </div>
 
           <div className={`flex flex-wrap justify-center gap-8 text-sm font-black text-slate-400 uppercase tracking-widest ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <a href="#" className="hover:text-sky-400 transition-colors">{t('footer.privacy')}</a>
-            <a href="#" className="hover:text-sky-400 transition-colors">{t('footer.terms')}</a>
-            <a href="#" className="hover:text-sky-400 transition-colors">{t('footer.contact')}</a>
+            <a href="#benefits" onClick={(e) => { e.preventDefault(); document.getElementById('benefits')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-sky-400 transition-colors">{t('footer.privacy')}</a>
+            <a href="#faq" onClick={(e) => { e.preventDefault(); document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-sky-400 transition-colors">{t('footer.terms')}</a>
+            <a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-sky-400 transition-colors">{t('footer.contact')}</a>
             <a href="https://wa.me/923278651402" target="_blank" rel="noopener noreferrer" className="hover:text-sky-400 transition-colors">{t('footer.whatsapp')}</a>
           </div>
 
