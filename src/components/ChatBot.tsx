@@ -191,12 +191,25 @@ export const ChatBot = () => {
                   </div>
                 </div>
               </div>
-              <button 
-                onClick={() => setIsOpen(false)}
-                className="p-2 hover:bg-white/10 rounded-xl text-slate-400 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    const chatHistory = messages.map(m => `*${m.role === 'user' ? 'User' : 'AI'}:* ${m.text}`).join('%0A%0A');
+                    const whatsappUrl = `https://wa.me/923278651402?text=*Chat History with Architect AI*%0A%0A${chatHistory}`;
+                    window.open(whatsappUrl, '_blank');
+                  }}
+                  className="p-2 hover:bg-white/10 rounded-xl text-sky-400 transition-colors flex items-center gap-2"
+                  title={language === 'ur' ? 'چیٹ بھیجیں' : 'Send Chat'}
+                >
+                  <Share2 className="w-5 h-5" />
+                </button>
+                <button 
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 hover:bg-white/10 rounded-xl text-slate-400 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {/* Messages */}
@@ -287,9 +300,10 @@ export const ChatBot = () => {
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || loading}
-                  className="p-4 bg-sky-500 hover:bg-sky-400 disabled:bg-slate-800 text-white rounded-2xl transition-all shadow-lg shadow-sky-500/20 flex-shrink-0"
+                  className={`px-6 py-4 bg-sky-500 hover:bg-sky-400 disabled:bg-slate-800 text-white rounded-2xl transition-all shadow-lg shadow-sky-500/20 flex items-center gap-2 font-black uppercase tracking-widest text-xs ${isRTL ? 'flex-row-reverse' : ''}`}
                 >
-                  <Send className="w-6 h-6" />
+                  <span className="hidden sm:inline">{language === 'ur' ? 'بھیجیں' : 'Send'}</span>
+                  <Send className="w-5 h-5" />
                 </button>
               </div>
             </div>
@@ -301,9 +315,14 @@ export const ChatBot = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="p-5 bg-sky-500 text-white rounded-[24px] shadow-2xl shadow-sky-500/40 hover:bg-sky-400 transition-all relative group"
+        className="p-5 bg-sky-500 text-white rounded-[24px] shadow-2xl shadow-sky-500/40 hover:bg-sky-400 transition-all relative group flex flex-col items-center gap-1"
       >
-        {isOpen ? <X className="w-7 h-7" /> : <MessageSquare className="w-7 h-7" />}
+        {isOpen ? <X className="w-7 h-7" /> : (
+          <>
+            <MessageSquare className="w-7 h-7" />
+            <span className="text-[10px] font-black uppercase tracking-widest">{language === 'ur' ? 'بھیجیں' : 'Send'}</span>
+          </>
+        )}
         {!isOpen && (
           <span className="absolute left-full ml-4 px-4 py-2 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-white/10 pointer-events-none">
             {language === 'ur' ? 'آرکیٹیکٹ سے بات کریں' : 'Chat with Architect'}
