@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, MessageSquare } from 'lucide-react';
+import { Menu, X, MessageSquare, Bot } from 'lucide-react';
 
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -136,17 +136,38 @@ export const Navbar = () => {
                 </motion.a>
               ))}
 
-              <motion.a 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.1 + 0.2 }}
-                href="https://wa.me/923278651402" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-full py-5 bg-sky-500 text-white rounded-[24px] text-center font-black text-lg shadow-xl shadow-sky-500/20 uppercase tracking-widest"
-              >
-                {t('nav.chatWithArchitect')}
-              </motion.a>
+              <div className="flex flex-col gap-4">
+                <motion.a 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navLinks.length * 0.1 + 0.2 }}
+                  href="https://wa.me/923278651402" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-full py-5 bg-[#25D366] text-white rounded-[24px] text-center font-black text-lg shadow-xl shadow-emerald-500/20 uppercase tracking-widest flex items-center justify-center gap-3"
+                >
+                  <MessageSquare className="w-6 h-6" />
+                  {t('nav.chatWithArchitect')}
+                </motion.a>
+                <motion.button 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navLinks.length * 0.1 + 0.3 }}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    // We need a way to trigger the chatbot from here.
+                    // Since ChatBot is a sibling, we might need a global state or just rely on the floating button.
+                    // For now, let's assume the user can just click the floating button, 
+                    // but we'll add this for visual consistency.
+                    const event = new CustomEvent('open-chatbot');
+                    window.dispatchEvent(event);
+                  }}
+                  className="w-full py-5 bg-sky-500 text-white rounded-[24px] text-center font-black text-lg shadow-xl shadow-sky-500/20 uppercase tracking-widest flex items-center justify-center gap-3"
+                >
+                  <Bot className="w-6 h-6" />
+                  {t('nav.chatWithAI')}
+                </motion.button>
+              </div>
             </div>
           </motion.div>
         )}

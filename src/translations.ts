@@ -7,6 +7,7 @@ export const translations: any = {
       faq: "FAQ",
       chatNow: "Chat Now",
       chatWithArchitect: "Chat with the Architect",
+      chatWithAI: "Chat with AI Assistant",
       logo: "The Prompt Architect"
     },
     hero: {
@@ -150,6 +151,7 @@ export const translations: any = {
       faq: "سوالات",
       chatNow: "ابھی بات کریں",
       chatWithArchitect: "آرکیٹیکٹ سے بات کریں",
+      chatWithAI: "AI مددگار سے بات کریں",
       logo: "دی پرامپٹ آرکیٹیکٹ"
     },
     hero: {

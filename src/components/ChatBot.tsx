@@ -68,6 +68,12 @@ export const ChatBot = () => {
   };
 
   useEffect(() => {
+    const handleOpenChatbot = () => setIsOpen(true);
+    window.addEventListener('open-chatbot', handleOpenChatbot);
+    return () => window.removeEventListener('open-chatbot', handleOpenChatbot);
+  }, []);
+
+  useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
@@ -167,7 +173,7 @@ export const ChatBot = () => {
   };
 
   return (
-    <div className="fixed bottom-8 left-8 z-[60] flex flex-col items-start">
+    <div className="fixed bottom-6 left-6 sm:bottom-8 sm:left-8 z-[60] flex flex-col items-start">
       {/* WhatsApp Floating Button */}
       <AnimatePresence>
         {!isOpen && (
@@ -180,10 +186,10 @@ export const ChatBot = () => {
             href="https://wa.me/923278651402"
             target="_blank"
             rel="noopener noreferrer"
-            className="mb-4 p-5 bg-[#25D366] text-white rounded-[24px] shadow-2xl shadow-emerald-500/20 hover:bg-[#22c35e] transition-all relative group flex flex-col items-center gap-1"
+            className="mb-3 sm:mb-4 p-4 sm:p-5 bg-[#25D366] text-white rounded-[20px] sm:rounded-[24px] shadow-2xl shadow-emerald-500/20 hover:bg-[#22c35e] transition-all relative group flex flex-col items-center gap-1"
           >
-            <Phone className="w-7 h-7" />
-            <span className="text-[10px] font-black uppercase tracking-widest">{language === 'ur' ? 'واٹس ایپ' : 'WhatsApp'}</span>
+            <Phone className="w-6 h-6 sm:w-7 h-7" />
+            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest">{language === 'ur' ? 'واٹس ایپ' : 'WhatsApp'}</span>
             <span className="absolute left-full ml-4 px-4 py-2 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-white/10 pointer-events-none">
               {language === 'ur' ? 'آرکیٹیکٹ سے بات کریں' : 'Chat with Architect'}
             </span>
@@ -197,7 +203,7 @@ export const ChatBot = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="mb-4 w-[calc(100vw-2rem)] sm:w-[400px] h-[500px] max-h-[70vh] sm:max-h-[600px] bg-[#020617] border-2 border-white/20 rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden z-[70] !opacity-100"
+            className="mb-4 w-[calc(100vw-3rem)] sm:w-[400px] h-[500px] max-h-[70vh] sm:max-h-[600px] bg-[#020617] border-2 border-white/20 rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden z-[70] !opacity-100"
             style={{ backgroundColor: '#020617' }}
           >
             {/* Header */}
@@ -338,12 +344,12 @@ export const ChatBot = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="p-5 bg-sky-500 text-white rounded-[24px] shadow-2xl shadow-sky-500/20 hover:bg-sky-400 transition-all relative group flex flex-col items-center gap-1"
+        className="p-4 sm:p-5 bg-sky-500 text-white rounded-[20px] sm:rounded-[24px] shadow-2xl shadow-sky-500/20 hover:bg-sky-400 transition-all relative group flex flex-col items-center gap-1"
       >
-        {isOpen ? <X className="w-7 h-7" /> : (
+        {isOpen ? <X className="w-6 h-6 sm:w-7 h-7" /> : (
           <>
             <div className="relative">
-              <Bot className="w-7 h-7" />
+              <Bot className="w-6 h-6 sm:w-7 h-7" />
               <motion.div
                 animate={{ 
                   opacity: [0.4, 1, 0.4],
@@ -352,10 +358,10 @@ export const ChatBot = () => {
                 transition={{ duration: 2, repeat: Infinity }}
                 className="absolute -top-1 -right-1"
               >
-                <div className="w-2 h-2 bg-emerald-400 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-emerald-400 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
               </motion.div>
             </div>
-            <span className="text-[10px] font-black uppercase tracking-widest">{language === 'ur' ? 'AI مددگار' : 'AI Assistant'}</span>
+            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest">{language === 'ur' ? 'AI مددگار' : 'AI Assistant'}</span>
           </>
         )}
         {!isOpen && (
