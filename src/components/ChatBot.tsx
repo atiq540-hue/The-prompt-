@@ -157,10 +157,11 @@ export const ChatBot = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="mb-4 w-[calc(100vw-2rem)] sm:w-[400px] h-[500px] max-h-[70vh] sm:max-h-[600px] bg-slate-950 border border-white/20 rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden z-[70]"
+            className="mb-4 w-[calc(100vw-2rem)] sm:w-[400px] h-[500px] max-h-[70vh] sm:max-h-[600px] bg-[#020617] border-2 border-white/20 rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden z-[70] !opacity-100"
+            style={{ backgroundColor: '#020617' }}
           >
             {/* Header */}
-            <div className="p-6 bg-slate-900 border-b border-white/10 flex items-center justify-between">
+            <div className="p-6 bg-[#0f172a] border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-sky-500 rounded-2xl flex items-center justify-center shadow-lg shadow-sky-500/20">
                   <Bot className="text-white w-6 h-6" />
@@ -184,7 +185,8 @@ export const ChatBot = () => {
             {/* Messages */}
             <div 
               ref={scrollRef}
-              className="flex-1 overflow-y-auto p-6 space-y-4 scroll-smooth bg-slate-950"
+              className="flex-1 overflow-y-auto p-6 space-y-4 scroll-smooth bg-[#020617]"
+              style={{ backgroundColor: '#020617' }}
             >
               {messages.map((m, i) => (
                 <motion.div
@@ -193,10 +195,10 @@ export const ChatBot = () => {
                   animate={{ opacity: 1, x: 0 }}
                   className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm shadow-sm ${
+                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm shadow-md ${
                     m.role === 'user' 
                       ? 'bg-sky-600 text-white rounded-tr-none' 
-                      : 'bg-slate-800 text-slate-100 rounded-tl-none border border-white/10'
+                      : 'bg-[#1e293b] text-slate-50 rounded-tl-none border border-white/10'
                   }`}>
                     <div className="markdown-body prose prose-invert prose-sm max-w-none">
                       <Markdown>{m.text}</Markdown>
@@ -206,7 +208,7 @@ export const ChatBot = () => {
               ))}
               {loading && (
                 <div className="flex justify-start">
-                  <div className="bg-slate-800 p-4 rounded-2xl rounded-tl-none border border-white/10">
+                  <div className="bg-[#1e293b] p-4 rounded-2xl rounded-tl-none border border-white/10">
                     <Loader2 className="w-4 h-4 text-sky-500 animate-spin" />
                   </div>
                 </div>
@@ -220,16 +222,16 @@ export const ChatBot = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
-                  className="px-6 py-4 bg-sky-500/20 border-t border-sky-500/30"
+                  className="px-6 py-4 bg-sky-500/30 border-t border-sky-500/40"
                 >
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex-1">
-                      <p className="text-sky-400 text-[10px] font-black uppercase tracking-widest mb-1">Lead Summary Ready</p>
-                      <p className="text-white text-xs font-medium truncate">{leadData.name} - {leadData.businessType}</p>
+                      <p className="text-sky-300 text-[10px] font-black uppercase tracking-widest mb-1">Lead Summary Ready</p>
+                      <p className="text-white text-xs font-bold truncate">{leadData.name} - {leadData.businessType}</p>
                     </div>
                     <button
                       onClick={handleShareWithArchitect}
-                      className="flex items-center gap-2 px-4 py-2 bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold rounded-xl transition-all shadow-lg shadow-sky-500/20 whitespace-nowrap"
+                      className="flex items-center gap-2 px-4 py-2 bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold rounded-xl transition-all shadow-lg shadow-sky-500/40 whitespace-nowrap"
                     >
                       <Share2 className="w-3.5 h-3.5" />
                       {language === 'ur' ? 'آرکیٹیکٹ کو بھیجیں' : 'Send to Architect'}
@@ -241,7 +243,7 @@ export const ChatBot = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="px-6 py-4 bg-emerald-500/20 border-t border-emerald-500/30"
+                  className="px-6 py-4 bg-emerald-500/30 border-t border-emerald-500/40"
                 >
                   <div className="flex items-center gap-3 text-emerald-400">
                     <CheckCircle2 className="w-4 h-4" />
@@ -254,7 +256,7 @@ export const ChatBot = () => {
             </AnimatePresence>
 
             {/* Input */}
-            <div className="p-5 bg-slate-900 border-t border-white/10">
+            <div className="p-5 bg-[#0f172a] border-t border-white/10">
               <div className="relative flex items-center gap-3">
                 <input
                   type="text"
@@ -262,7 +264,8 @@ export const ChatBot = () => {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                   placeholder={language === 'ur' ? 'پیغام لکھیں...' : 'Type a message...'}
-                  className={`flex-1 bg-slate-950 border border-white/10 rounded-2xl px-5 py-4 text-white text-base focus:outline-none focus:border-sky-500 transition-all ${isRTL ? 'text-right' : 'text-left'}`}
+                  className={`flex-1 bg-[#020617] border border-white/20 rounded-2xl px-5 py-4 text-white text-base focus:outline-none focus:border-sky-500 transition-all ${isRTL ? 'text-right' : 'text-left'}`}
+                  style={{ backgroundColor: '#020617' }}
                 />
                 <button
                   onClick={handleSend}
