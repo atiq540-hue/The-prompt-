@@ -3,21 +3,9 @@ import { motion } from 'motion/react';
 import { ExternalLink } from 'lucide-react';
 
 import { useLanguage } from '../contexts/LanguageContext';
-import { useTheme } from '../contexts/ThemeContext';
 
 export const Portfolio = () => {
   const { t, isRTL } = useLanguage();
-  const { themeColor } = useTheme();
-
-  const theme = (() => {
-    switch(themeColor) {
-      case 'emerald': return { bg: 'bg-emerald-500', hover: 'hover:bg-emerald-400', shadow: 'shadow-emerald-500/20', text: 'text-emerald-400', border: 'border-emerald-500/20', glow: 'bg-emerald-500/5' };
-      case 'rose': return { bg: 'bg-rose-500', hover: 'hover:bg-rose-400', shadow: 'shadow-rose-500/20', text: 'text-rose-400', border: 'border-rose-500/20', glow: 'bg-rose-500/5' };
-      case 'amber': return { bg: 'bg-amber-500', hover: 'hover:bg-amber-400', shadow: 'shadow-amber-500/20', text: 'text-amber-400', border: 'border-amber-500/20', glow: 'bg-amber-500/5' };
-      case 'violet': return { bg: 'bg-violet-500', hover: 'hover:bg-violet-400', shadow: 'shadow-violet-500/20', text: 'text-violet-400', border: 'border-violet-500/20', glow: 'bg-violet-500/5' };
-      default: return { bg: 'bg-sky-500', hover: 'hover:bg-sky-400', shadow: 'shadow-sky-500/20', text: 'text-sky-400', border: 'border-sky-500/20', glow: 'bg-sky-500/5' };
-    }
-  })();
   const projects = [
     {
       title: t('portfolio.projects.0.title'),
@@ -41,7 +29,7 @@ export const Portfolio = () => {
 
   return (
     <section id="portfolio" className="py-24 md:py-32 bg-slate-700 relative overflow-hidden">
-      <div className={`absolute top-0 left-0 w-1/2 h-full ${theme.glow} blur-[120px] pointer-events-none`} />
+      <div className="absolute top-0 left-0 w-1/2 h-full bg-sky-500/5 blur-[120px] pointer-events-none" />
       
       <div className="container mx-auto px-6 relative z-10">
         <div className={`flex flex-col lg:flex-row justify-between items-center lg:items-end mb-20 gap-8 text-center ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}>
@@ -87,13 +75,13 @@ export const Portfolio = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
               <div className={`space-y-4 px-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                <div className={`${theme.text} text-sm font-black uppercase tracking-[0.2em] flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <div className={`w-8 h-[1px] ${theme.bg}`} />
+                <div className={`text-sky-400 text-sm font-black uppercase tracking-[0.2em] flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <div className="w-8 h-[1px] bg-sky-500" />
                   {project.category}
                 </div>
-                <h3 className={`text-2xl font-bold text-white group-hover:${theme.text} transition-colors`}>{project.title}</h3>
-                <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full ${theme.bg}/10 ${theme.text} text-sm font-bold border ${theme.border} ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <div className={`w-1.5 h-1.5 ${theme.bg} rounded-full animate-pulse`} />
+                <h3 className="text-2xl font-bold text-white group-hover:text-sky-400 transition-colors">{project.title}</h3>
+                <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 text-sky-400 text-sm font-bold border border-sky-500/20 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <div className="w-1.5 h-1.5 bg-sky-500 rounded-full animate-pulse" />
                   {project.result}
                 </div>
               </div>

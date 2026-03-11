@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
-import { ThemeProvider } from './contexts/ThemeContext';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ValueStack } from './components/ValueStack';
@@ -21,11 +20,9 @@ import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <AppContent />
-      </LanguageProvider>
-    </ThemeProvider>
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }
 
