@@ -4,9 +4,21 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Image as ImageIcon, Wand2, Loader2, Upload, Download } from 'lucide-react';
 
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 export const AIDemo = () => {
   const { t, isRTL } = useLanguage();
+  const { themeColor } = useTheme();
+
+  const theme = (() => {
+    switch(themeColor) {
+      case 'emerald': return { bg: 'bg-emerald-500', hover: 'hover:bg-emerald-400', shadow: 'shadow-emerald-500/20', text: 'text-emerald-400', border: 'border-emerald-500/20', glow: 'bg-emerald-500/5' };
+      case 'rose': return { bg: 'bg-rose-500', hover: 'hover:bg-rose-400', shadow: 'shadow-rose-500/20', text: 'text-rose-400', border: 'border-rose-500/20', glow: 'bg-rose-500/5' };
+      case 'amber': return { bg: 'bg-amber-500', hover: 'hover:bg-amber-400', shadow: 'shadow-amber-500/20', text: 'text-amber-400', border: 'border-amber-500/20', glow: 'bg-amber-500/5' };
+      case 'violet': return { bg: 'bg-violet-500', hover: 'hover:bg-violet-400', shadow: 'shadow-violet-500/20', text: 'text-violet-400', border: 'border-violet-500/20', glow: 'bg-violet-500/5' };
+      default: return { bg: 'bg-sky-500', hover: 'hover:bg-sky-400', shadow: 'shadow-sky-500/20', text: 'text-sky-400', border: 'border-sky-500/20', glow: 'bg-sky-500/5' };
+    }
+  })();
   const [image, setImage] = useState<string | null>(null);
   const [prompt, setPrompt] = useState('');
   const [loading, setLoading] = useState(false);
@@ -80,8 +92,8 @@ export const AIDemo = () => {
 
   return (
     <section id="demo" className="py-24 md:py-32 bg-slate-800 border-y border-white/5 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-sky-500/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-1/2 h-full bg-emerald-500/5 blur-[120px] pointer-events-none" />
+      <div className={`absolute top-0 right-0 w-1/2 h-full ${theme.glow} blur-[120px] pointer-events-none`} />
+      <div className={`absolute bottom-0 left-0 w-1/2 h-full ${theme.glow} blur-[120px] pointer-events-none`} />
       
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <div className="text-center mb-16">
@@ -90,7 +102,7 @@ export const AIDemo = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black uppercase tracking-widest mb-6">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${theme.bg}/10 border ${theme.border} ${theme.text} text-xs font-black uppercase tracking-widest mb-6`}>
               <Wand2 className="w-4 h-4" />
               {t('aiDemo.badge')}
             </div>
@@ -109,12 +121,12 @@ export const AIDemo = () => {
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 bg-slate-900/50 backdrop-blur-xl p-6 sm:p-10 rounded-[48px] border border-white/5 shadow-2xl"
         >
           <div className="space-y-8">
-            <div className="aspect-square rounded-[40px] bg-slate-800/50 border-2 border-dashed border-white/10 flex flex-col items-center justify-center relative overflow-hidden group transition-all duration-500 hover:border-sky-500/50">
+            <div className={`aspect-square rounded-[40px] bg-slate-800/50 border-2 border-dashed border-white/10 flex flex-col items-center justify-center relative overflow-hidden group transition-all duration-500 hover:border-${themeColor}-500/50`}>
               {image ? (
                 <>
                   <img src={image} alt="Original" className="w-full h-full object-contain p-4" />
                   <label className="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center cursor-pointer text-white backdrop-blur-sm">
-                    <div className="w-16 h-16 rounded-full bg-sky-500 flex items-center justify-center mb-4 shadow-xl shadow-sky-500/20">
+                    <div className={`w-16 h-16 rounded-full ${theme.bg} flex items-center justify-center mb-4 shadow-xl ${theme.shadow}`}>
                       <Upload className="w-8 h-8" />
                     </div>
                     <span className="font-black uppercase tracking-widest text-sm">{t('aiDemo.change')}</span>
@@ -122,10 +134,10 @@ export const AIDemo = () => {
                   </label>
                 </>
               ) : (
-                <label className="flex flex-col items-center justify-center cursor-pointer text-slate-500 hover:text-sky-400 transition-all duration-500 w-full h-full p-12 text-center group">
+                <label className={`flex flex-col items-center justify-center cursor-pointer text-slate-500 hover:text-${themeColor}-400 transition-all duration-500 w-full h-full p-12 text-center group`}>
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-24 h-24 rounded-[32px] bg-slate-800 flex items-center justify-center mb-6 group-hover:bg-sky-500 group-hover:text-white transition-all duration-500 shadow-xl"
+                    className={`w-24 h-24 rounded-[32px] bg-slate-800 flex items-center justify-center mb-6 group-hover:bg-${themeColor}-500 group-hover:text-white transition-all duration-500 shadow-xl`}
                   >
                     <ImageIcon className="w-12 h-12" />
                   </motion.div>
@@ -142,7 +154,7 @@ export const AIDemo = () => {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder={t('aiDemo.placeholder')}
-                  className={`w-full bg-slate-800/50 border border-white/10 rounded-[24px] px-6 py-5 text-white focus:outline-none focus:border-sky-500 focus:ring-4 focus:ring-sky-500/10 transition-all h-36 resize-none text-lg font-light leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}
+                  className={`w-full bg-slate-800/50 border border-white/10 rounded-[24px] px-6 py-5 text-white focus:outline-none focus:border-${themeColor}-500 focus:ring-4 focus:ring-${themeColor}-500/10 transition-all h-36 resize-none text-lg font-light leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}
                 />
                 <div className={`absolute bottom-4 text-[10px] text-slate-500 uppercase font-black tracking-[0.2em] ${isRTL ? 'left-6' : 'right-6'}`}>
                   {t('aiDemo.label')}
@@ -153,7 +165,7 @@ export const AIDemo = () => {
                 whileTap={{ scale: 0.98 }}
                 onClick={handleEdit}
                 disabled={!image || !prompt || loading}
-                className="w-full py-6 bg-sky-500 hover:bg-sky-400 disabled:bg-slate-800 disabled:text-slate-600 text-white rounded-[24px] font-black text-xl transition-all flex items-center justify-center gap-4 shadow-2xl shadow-sky-500/20"
+                className={`w-full py-6 ${theme.bg} ${theme.hover} disabled:bg-slate-800 disabled:text-slate-600 text-white rounded-[24px] font-black text-xl transition-all flex items-center justify-center gap-4 shadow-2xl ${theme.shadow}`}
               >
                 {loading ? <Loader2 className="w-7 h-7 animate-spin" /> : <Wand2 className="w-7 h-7" />}
                 {loading ? t('aiDemo.processing') : t('aiDemo.button')}
@@ -199,9 +211,9 @@ export const AIDemo = () => {
                 >
                   <div className="w-28 h-28 bg-slate-800 rounded-[40px] flex items-center justify-center mx-auto mb-8 relative shadow-2xl">
                     {loading && (
-                      <div className="absolute inset-0 border-4 border-sky-500 border-t-transparent rounded-[40px] animate-spin" />
+                      <div className={`absolute inset-0 border-4 border-${themeColor}-500 border-t-transparent rounded-[40px] animate-spin`} />
                     )}
-                    <Loader2 className={`w-14 h-14 text-slate-700 transition-colors duration-500 ${loading ? 'text-sky-500' : ''}`} />
+                    <Loader2 className={`w-14 h-14 text-slate-700 transition-colors duration-500 ${loading ? theme.text : ''}`} />
                   </div>
                   <h4 className="text-white font-black text-3xl mb-3 tracking-tight">
                     {loading ? t('aiDemo.generating') : t('aiDemo.ready')}

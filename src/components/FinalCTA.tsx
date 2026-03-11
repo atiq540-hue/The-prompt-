@@ -3,12 +3,24 @@ import { motion } from 'motion/react';
 import { Send, Phone } from 'lucide-react';
 
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 export const FinalCTA = () => {
   const { t, isRTL } = useLanguage();
+  const { themeColor } = useTheme();
+
+  const theme = (() => {
+    switch(themeColor) {
+      case 'emerald': return { bg: 'bg-emerald-500', hover: 'hover:bg-emerald-400', shadow: 'shadow-emerald-500/20', text: 'text-emerald-400', border: 'focus:border-emerald-500', glow: 'bg-emerald-500/5' };
+      case 'rose': return { bg: 'bg-rose-500', hover: 'hover:bg-rose-400', shadow: 'shadow-rose-500/20', text: 'text-rose-400', border: 'focus:border-rose-500', glow: 'bg-rose-500/5' };
+      case 'amber': return { bg: 'bg-amber-500', hover: 'hover:bg-amber-400', shadow: 'shadow-amber-500/20', text: 'text-amber-400', border: 'focus:border-amber-500', glow: 'bg-amber-500/5' };
+      case 'violet': return { bg: 'bg-violet-500', hover: 'hover:bg-violet-400', shadow: 'shadow-violet-500/20', text: 'text-violet-400', border: 'focus:border-violet-500', glow: 'bg-violet-500/5' };
+      default: return { bg: 'bg-sky-500', hover: 'hover:bg-sky-400', shadow: 'shadow-sky-500/20', text: 'text-sky-400', border: 'focus:border-sky-500', glow: 'bg-sky-500/5' };
+    }
+  })();
   return (
     <section id="contact" className="py-24 md:py-32 bg-slate-800 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-sky-500/5 blur-[120px] pointer-events-none" />
+      <div className={`absolute top-0 right-0 w-1/3 h-full ${theme.glow} blur-[120px] pointer-events-none`} />
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
@@ -30,7 +42,7 @@ export const FinalCTA = () => {
                 href="https://wa.me/923278651402?text=Hi! I'm interested in starting a project with The Prompt Architect."
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`w-full sm:w-auto px-10 py-5 bg-sky-500 hover:bg-sky-400 text-white rounded-[24px] font-black text-xl transition-all flex items-center justify-center gap-3 shadow-2xl shadow-sky-500/30 ${isRTL ? 'flex-row-reverse' : ''}`}
+                className={`w-full sm:w-auto px-10 py-5 ${theme.bg} ${theme.hover} text-white rounded-[24px] font-black text-xl transition-all flex items-center justify-center gap-3 shadow-2xl ${theme.shadow} ${isRTL ? 'flex-row-reverse' : ''}`}
               >
                 <Phone className="w-6 h-6" />
                 {t('finalCTA.chatBtn')}
@@ -49,7 +61,7 @@ export const FinalCTA = () => {
             transition={{ duration: 0.8 }}
             className="p-8 sm:p-12 rounded-[48px] bg-slate-700/50 backdrop-blur-xl border border-white/5 shadow-2xl relative"
           >
-            <div className="absolute -top-12 -right-12 w-32 h-32 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className={`absolute -top-12 -right-12 w-32 h-32 ${theme.bg}/10 rounded-full blur-3xl pointer-events-none`} />
             <h3 className={`text-2xl md:text-3xl font-black text-white mb-8 tracking-tight ${isRTL ? 'text-right' : 'text-left'}`}>{t('finalCTA.formTitle')}</h3>
             <form 
               className="space-y-6" 
@@ -65,21 +77,21 @@ export const FinalCTA = () => {
             >
               <div className="space-y-2">
                 <label className={`block text-slate-400 text-xs font-black uppercase tracking-[0.2em] ml-1 ${isRTL ? 'text-right' : 'text-left'}`}>{t('finalCTA.labels.name')}</label>
-                <input name="name" type="text" required className={`w-full bg-slate-800/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-sky-500 transition-all text-base font-light ${isRTL ? 'text-right' : 'text-left'}`} placeholder={t('finalCTA.placeholders.name')} />
+                <input name="name" type="text" required className={`w-full bg-slate-800/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none ${theme.border} transition-all text-base font-light ${isRTL ? 'text-right' : 'text-left'}`} placeholder={t('finalCTA.placeholders.name')} />
               </div>
               <div className="space-y-2">
                 <label className={`block text-slate-400 text-xs font-black uppercase tracking-[0.2em] ml-1 ${isRTL ? 'text-right' : 'text-left'}`}>{t('finalCTA.labels.business')}</label>
-                <input name="business" type="text" required className={`w-full bg-slate-800/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-sky-500 transition-all text-base font-light ${isRTL ? 'text-right' : 'text-left'}`} placeholder={t('finalCTA.placeholders.business')} />
+                <input name="business" type="text" required className={`w-full bg-slate-800/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none ${theme.border} transition-all text-base font-light ${isRTL ? 'text-right' : 'text-left'}`} placeholder={t('finalCTA.placeholders.business')} />
               </div>
               <div className="space-y-2">
                 <label className={`block text-slate-400 text-xs font-black uppercase tracking-[0.2em] ml-1 ${isRTL ? 'text-right' : 'text-left'}`}>{t('finalCTA.labels.goal')}</label>
-                <textarea name="goal" required className={`w-full bg-slate-800/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-sky-500 transition-all h-32 resize-none text-base font-light ${isRTL ? 'text-right' : 'text-left'}`} placeholder={t('finalCTA.placeholders.goal')}></textarea>
+                <textarea name="goal" required className={`w-full bg-slate-800/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none ${theme.border} transition-all h-32 resize-none text-base font-light ${isRTL ? 'text-right' : 'text-left'}`} placeholder={t('finalCTA.placeholders.goal')}></textarea>
               </div>
               <motion.button 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit" 
-                className={`w-full py-5 bg-sky-500 hover:bg-sky-400 text-white rounded-2xl font-black text-lg transition-all flex items-center justify-center gap-3 shadow-xl shadow-sky-500/20 ${isRTL ? 'flex-row-reverse' : ''}`}
+                className={`w-full py-5 ${theme.bg} ${theme.hover} text-white rounded-2xl font-black text-lg transition-all flex items-center justify-center gap-3 shadow-xl ${theme.shadow} ${isRTL ? 'flex-row-reverse' : ''}`}
               >
                 {t('finalCTA.submit')}
                 <Send className={`w-5 h-5 ${isRTL ? 'rotate-180' : ''}`} />

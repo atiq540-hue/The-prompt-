@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageSquare, X, Send, Loader2, User, Bot, Share2, CheckCircle2 } from 'lucide-react';
+import { MessageSquare, X, Send, Loader2, User, Bot, Share2, CheckCircle2, Palette } from 'lucide-react';
 import { GoogleGenAI, Type } from "@google/genai";
 import Markdown from 'react-markdown';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface Message {
   role: 'user' | 'model';
@@ -19,6 +20,8 @@ interface LeadData {
 
 export const ChatBot = () => {
   const { t, language, isRTL } = useLanguage();
+  const { themeColor, setThemeColor } = useTheme();
+  const [showThemePicker, setShowThemePicker] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
@@ -166,6 +169,24 @@ export const ChatBot = () => {
     setIsSent(true);
   };
 
+  const themeOptions: { id: any, color: string }[] = [
+    { id: 'sky', color: '#0ea5e9' },
+    { id: 'emerald', color: '#10b981' },
+    { id: 'rose', color: '#f43f5e' },
+    { id: 'amber', color: '#f59e0b' },
+    { id: 'violet', color: '#8b5cf6' }
+  ];
+
+  const theme = (() => {
+    switch(themeColor) {
+      case 'emerald': return { bg: 'bg-emerald-500', hover: 'hover:bg-emerald-400', shadow: 'shadow-emerald-500/20', text: 'text-emerald-400', border: 'border-emerald-500/40', bgSoft: 'bg-emerald-500/10', bgAction: 'bg-emerald-500/30' };
+      case 'rose': return { bg: 'bg-rose-500', hover: 'hover:bg-rose-400', shadow: 'shadow-rose-500/20', text: 'text-rose-400', border: 'border-rose-500/40', bgSoft: 'bg-rose-500/10', bgAction: 'bg-rose-500/30' };
+      case 'amber': return { bg: 'bg-amber-500', hover: 'hover:bg-amber-400', shadow: 'shadow-amber-500/20', text: 'text-amber-400', border: 'border-amber-500/40', bgSoft: 'bg-amber-500/10', bgAction: 'bg-amber-500/30' };
+      case 'violet': return { bg: 'bg-violet-500', hover: 'hover:bg-violet-400', shadow: 'shadow-violet-500/20', text: 'text-violet-400', border: 'border-violet-500/40', bgSoft: 'bg-violet-500/10', bgAction: 'bg-violet-500/30' };
+      default: return { bg: 'bg-sky-500', hover: 'hover:bg-sky-400', shadow: 'shadow-sky-500/20', text: 'text-sky-400', border: 'border-sky-500/40', bgSoft: 'bg-sky-500/10', bgAction: 'bg-sky-500/30' };
+    }
+  })();
+
   return (
     <div className="fixed bottom-8 left-8 z-[60] flex flex-col items-start">
       <AnimatePresence>
@@ -180,7 +201,7 @@ export const ChatBot = () => {
             {/* Header */}
             <div className="p-6 bg-[#0f172a] border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-sky-500 rounded-2xl flex items-center justify-center shadow-lg shadow-sky-500/20">
+                <div className={`w-10 h-10 ${theme.bg} rounded-2xl flex items-center justify-center shadow-lg ${theme.shadow}`}>
                   <Bot className="text-white w-6 h-6" />
                 </div>
                 <div>
@@ -193,12 +214,19 @@ export const ChatBot = () => {
               </div>
               <div className="flex items-center gap-2">
                 <button
+                  onClick={() => setShowThemePicker(!showThemePicker)}
+                  className={`p-2 hover:bg-white/10 rounded-xl transition-colors ${showThemePicker ? theme.text : 'text-slate-400'}`}
+                  title={language === 'ur' ? 'تھیم تبدیل کریں' : 'Change Theme'}
+                >
+                  <Palette className="w-5 h-5" />
+                </button>
+                <button
                   onClick={() => {
                     const chatHistory = messages.map(m => `*${m.role === 'user' ? 'User' : 'AI'}:* ${m.text}`).join('%0A%0A');
                     const whatsappUrl = `https://wa.me/923278651402?text=*Chat History with Architect AI*%0A%0A${chatHistory}`;
                     window.open(whatsappUrl, '_blank');
                   }}
-                  className="p-2 hover:bg-white/10 rounded-xl text-sky-400 transition-colors flex items-center gap-2"
+                  className={`p-2 hover:bg-white/10 rounded-xl ${theme.text} transition-colors flex items-center gap-2`}
                   title={language === 'ur' ? 'چیٹ بھیجیں' : 'Send Chat'}
                 >
                   <Share2 className="w-5 h-5" />
@@ -211,6 +239,30 @@ export const ChatBot = () => {
                 </button>
               </div>
             </div>
+
+            {/* Theme Picker Overlay */}
+            <AnimatePresence>
+              {showThemePicker && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute top-[88px] left-0 w-full bg-[#0f172a] border-b border-white/10 p-4 z-50 flex justify-center gap-4"
+                >
+                  {themeOptions.map((opt) => (
+                    <button
+                      key={opt.id}
+                      onClick={() => {
+                        setThemeColor(opt.id);
+                        setShowThemePicker(false);
+                      }}
+                      className={`w-8 h-8 rounded-full border-2 transition-all ${themeColor === opt.id ? 'border-white scale-110' : 'border-transparent hover:scale-105'}`}
+                      style={{ backgroundColor: opt.color }}
+                    />
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Messages */}
             <div 
@@ -227,7 +279,7 @@ export const ChatBot = () => {
                 >
                   <div className={`max-w-[85%] p-4 rounded-2xl text-sm shadow-md ${
                     m.role === 'user' 
-                      ? 'bg-sky-600 text-white rounded-tr-none' 
+                      ? `${theme.bg} text-white rounded-tr-none` 
                       : 'bg-[#1e293b] text-slate-50 rounded-tl-none border border-white/10'
                   }`}>
                     <div className="markdown-body prose prose-invert prose-sm max-w-none">
@@ -239,7 +291,7 @@ export const ChatBot = () => {
               {loading && (
                 <div className="flex justify-start">
                   <div className="bg-[#1e293b] p-4 rounded-2xl rounded-tl-none border border-white/10">
-                    <Loader2 className="w-4 h-4 text-sky-500 animate-spin" />
+                    <Loader2 className={`w-4 h-4 ${theme.text} animate-spin`} />
                   </div>
                 </div>
               )}
@@ -252,16 +304,16 @@ export const ChatBot = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
-                  className="px-6 py-4 bg-sky-500/30 border-t border-sky-500/40"
+                  className={`${theme.bgAction} border-t ${theme.border}`}
                 >
-                  <div className="flex items-center justify-between gap-4">
+                  <div className="px-6 py-4 flex items-center justify-between gap-4">
                     <div className="flex-1">
-                      <p className="text-sky-300 text-[10px] font-black uppercase tracking-widest mb-1">Lead Summary Ready</p>
+                      <p className={`${theme.text} text-[10px] font-black uppercase tracking-widest mb-1 opacity-70`}>Lead Summary Ready</p>
                       <p className="text-white text-xs font-bold truncate">{leadData.name} - {leadData.businessType}</p>
                     </div>
                     <button
                       onClick={handleShareWithArchitect}
-                      className="flex items-center gap-2 px-4 py-2 bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold rounded-xl transition-all shadow-lg shadow-sky-500/40 whitespace-nowrap"
+                      className={`flex items-center gap-2 px-4 py-2 ${theme.bg} ${theme.hover} text-white text-xs font-bold rounded-xl transition-all shadow-lg ${theme.shadow} whitespace-nowrap`}
                     >
                       <Share2 className="w-3.5 h-3.5" />
                       {language === 'ur' ? 'آرکیٹیکٹ کو بھیجیں' : 'Send to Architect'}
@@ -300,9 +352,9 @@ export const ChatBot = () => {
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || loading}
-                  className={`px-6 py-4 bg-sky-500 hover:bg-sky-400 disabled:bg-slate-800 text-white rounded-2xl transition-all shadow-lg shadow-sky-500/20 flex items-center gap-2 font-black uppercase tracking-widest text-xs ${isRTL ? 'flex-row-reverse' : ''}`}
+                  className={`shrink-0 px-4 py-4 sm:px-6 ${theme.bg} ${theme.hover} disabled:bg-slate-800 text-white rounded-2xl transition-all shadow-lg ${theme.shadow} flex items-center gap-2 font-black uppercase tracking-widest text-xs ${isRTL ? 'flex-row-reverse' : ''}`}
                 >
-                  <span className="hidden sm:inline">{language === 'ur' ? 'بھیجیں' : 'Send'}</span>
+                  <span>{language === 'ur' ? 'بھیجیں' : 'Send'}</span>
                   <Send className="w-5 h-5" />
                 </button>
               </div>
@@ -315,7 +367,7 @@ export const ChatBot = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="p-5 bg-sky-500 text-white rounded-[24px] shadow-2xl shadow-sky-500/40 hover:bg-sky-400 transition-all relative group flex flex-col items-center gap-1"
+        className={`p-5 ${theme.bg} text-white rounded-[24px] shadow-2xl ${theme.shadow} ${theme.hover} transition-all relative group flex flex-col items-center gap-1`}
       >
         {isOpen ? <X className="w-7 h-7" /> : (
           <>

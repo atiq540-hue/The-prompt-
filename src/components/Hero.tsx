@@ -3,9 +3,11 @@ import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 export const Hero = () => {
   const { t, isRTL } = useLanguage();
+  const { themeColor } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -33,7 +35,15 @@ export const Hero = () => {
         this.size = Math.random() * 2 + 0.5;
         this.speedX = (Math.random() - 0.5) * 0.5;
         this.speedY = (Math.random() - 0.5) * 0.5;
-        this.color = `rgba(14, 165, 233, ${Math.random() * 0.5 + 0.2})`;
+        const colors = {
+          sky: '14, 165, 233',
+          emerald: '16, 185, 129',
+          rose: '244, 63, 94',
+          amber: '245, 158, 11',
+          violet: '139, 92, 246'
+        };
+        const baseColor = colors[themeColor as keyof typeof colors] || colors.sky;
+        this.color = `rgba(${baseColor}, ${Math.random() * 0.5 + 0.2})`;
       }
 
       update() {
@@ -126,6 +136,16 @@ export const Hero = () => {
     };
   }, []);
 
+  const theme = (() => {
+    switch(themeColor) {
+      case 'emerald': return { bg: 'bg-emerald-500', hover: 'hover:bg-emerald-400', shadow: 'shadow-emerald-500/20', text: 'text-emerald-400', border: 'border-emerald-500/10', glow: 'from-emerald-500/20' };
+      case 'rose': return { bg: 'bg-rose-500', hover: 'hover:bg-rose-400', shadow: 'shadow-rose-500/20', text: 'text-rose-400', border: 'border-rose-500/10', glow: 'from-rose-500/20' };
+      case 'amber': return { bg: 'bg-amber-500', hover: 'hover:bg-amber-400', shadow: 'shadow-amber-500/20', text: 'text-amber-400', border: 'border-amber-500/10', glow: 'from-amber-500/20' };
+      case 'violet': return { bg: 'bg-violet-500', hover: 'hover:bg-violet-400', shadow: 'shadow-violet-500/20', text: 'text-violet-400', border: 'border-violet-500/10', glow: 'from-violet-500/20' };
+      default: return { bg: 'bg-sky-500', hover: 'hover:bg-sky-400', shadow: 'shadow-sky-500/20', text: 'text-sky-400', border: 'border-sky-500/10', glow: 'from-sky-500/20' };
+    }
+  })();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900 pt-20">
       <canvas
@@ -152,7 +172,7 @@ export const Hero = () => {
                 initial={{ opacity: 0, x: isRTL ? 40 : -40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6, duration: 1, ease: "easeOut" }}
-                className="text-sky-500 italic font-serif inline-block lowercase tracking-normal"
+                className={`${theme.text} italic font-serif inline-block lowercase tracking-normal`}
               >
                 {t('hero.titleAccent')}
               </motion.span>
@@ -180,7 +200,7 @@ export const Hero = () => {
               href="https://wa.me/923278651402?text=Hi! I'm interested in starting a project with The Prompt Architect."
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-12 py-6 bg-sky-500 hover:bg-sky-400 text-white rounded-[24px] font-black text-xl transition-all shadow-2xl shadow-sky-500/30 flex items-center justify-center gap-4 active:scale-95 uppercase tracking-widest"
+              className={`w-full sm:w-auto px-12 py-6 ${theme.bg} ${theme.hover} text-white rounded-[24px] font-black text-xl transition-all shadow-2xl ${theme.shadow} flex items-center justify-center gap-4 active:scale-95 uppercase tracking-widest`}
             >
               {t('hero.ctaChat')}
               <ArrowRight className={`w-6 h-6 ${isRTL ? 'rotate-180' : ''}`} />
@@ -211,7 +231,7 @@ export const Hero = () => {
           <motion.div 
             animate={{ opacity: [0.2, 1, 0.2] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-1.5 h-3 bg-sky-500 rounded-full" 
+            className={`w-1.5 h-3 ${theme.bg} rounded-full`} 
           />
         </motion.div>
       </motion.div>
