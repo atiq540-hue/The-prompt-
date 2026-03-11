@@ -82,7 +82,18 @@ export const ChatBot = () => {
     setLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
+      if (!process.env.GEMINI_API_KEY) {
+        setMessages(prev => [...prev, { 
+          role: 'model', 
+          text: language === 'ur' 
+            ? 'معذرت، AI کی ترتیب میں مسئلہ ہے۔ براہ کرم یقینی بنائیں کہ API Key سیٹ ہے۔' 
+            : 'Sorry, the AI is not configured correctly. Please ensure the GEMINI_API_KEY is set in the environment variables.' 
+        }]);
+        setLoading(false);
+        return;
+      }
+
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
       const chat = ai.chats.create({
         model: "gemini-3.1-pro-preview",
         config: {
@@ -117,7 +128,7 @@ export const ChatBot = () => {
       }
     } catch (error) {
       console.error('Chat Error:', error);
-      setMessages(prev => [...prev, { role: 'model', text: language === 'ur' ? 'معذرت، کچھ غلط ہو گیا۔ براہ کرم دوبارہ کوشش کریں۔' : 'Sorry, something went wrong. Please try again.' }]);
+      setMessages(prev => [...prev, { role: 'model', text: language === 'ur' ? 'معذرت، رابطہ کرنے میں مسئلہ ہوا۔ براہ کرم دوبارہ کوشش کریں۔' : 'Sorry, I am having trouble connecting. Please try again in a moment.' }]);
     } finally {
       setLoading(false);
     }
@@ -146,10 +157,10 @@ export const ChatBot = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="mb-4 w-[350px] sm:w-[400px] h-[550px] bg-slate-900 border border-white/10 rounded-[32px] shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl"
+            className="mb-4 w-[calc(100vw-2rem)] sm:w-[400px] h-[500px] max-h-[70vh] sm:max-h-[600px] bg-slate-950 border border-white/20 rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden z-[70]"
           >
             {/* Header */}
-            <div className="p-6 bg-slate-800 border-b border-white/5 flex items-center justify-between">
+            <div className="p-6 bg-slate-900 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-sky-500 rounded-2xl flex items-center justify-center shadow-lg shadow-sky-500/20">
                   <Bot className="text-white w-6 h-6" />
@@ -164,7 +175,7 @@ export const ChatBot = () => {
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="p-2 hover:bg-white/5 rounded-xl text-slate-400 transition-colors"
+                className="p-2 hover:bg-white/10 rounded-xl text-slate-400 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -173,7 +184,7 @@ export const ChatBot = () => {
             {/* Messages */}
             <div 
               ref={scrollRef}
-              className="flex-1 overflow-y-auto p-6 space-y-4 scroll-smooth"
+              className="flex-1 overflow-y-auto p-6 space-y-4 scroll-smooth bg-slate-950"
             >
               {messages.map((m, i) => (
                 <motion.div
@@ -182,10 +193,10 @@ export const ChatBot = () => {
                   animate={{ opacity: 1, x: 0 }}
                   className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm ${
+                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm shadow-sm ${
                     m.role === 'user' 
-                      ? 'bg-sky-500 text-white rounded-tr-none' 
-                      : 'bg-slate-800 text-slate-200 rounded-tl-none border border-white/5'
+                      ? 'bg-sky-600 text-white rounded-tr-none' 
+                      : 'bg-slate-800 text-slate-100 rounded-tl-none border border-white/10'
                   }`}>
                     <div className="markdown-body prose prose-invert prose-sm max-w-none">
                       <Markdown>{m.text}</Markdown>
@@ -195,7 +206,7 @@ export const ChatBot = () => {
               ))}
               {loading && (
                 <div className="flex justify-start">
-                  <div className="bg-slate-800 p-4 rounded-2xl rounded-tl-none border border-white/5">
+                  <div className="bg-slate-800 p-4 rounded-2xl rounded-tl-none border border-white/10">
                     <Loader2 className="w-4 h-4 text-sky-500 animate-spin" />
                   </div>
                 </div>
@@ -209,7 +220,7 @@ export const ChatBot = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
-                  className="px-6 py-4 bg-sky-500/10 border-t border-sky-500/20"
+                  className="px-6 py-4 bg-sky-500/20 border-t border-sky-500/30"
                 >
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex-1">
@@ -230,7 +241,7 @@ export const ChatBot = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="px-6 py-4 bg-emerald-500/10 border-t border-emerald-500/20"
+                  className="px-6 py-4 bg-emerald-500/20 border-t border-emerald-500/30"
                 >
                   <div className="flex items-center gap-3 text-emerald-400">
                     <CheckCircle2 className="w-4 h-4" />
@@ -243,22 +254,22 @@ export const ChatBot = () => {
             </AnimatePresence>
 
             {/* Input */}
-            <div className="p-4 bg-slate-800/50 border-t border-white/5">
-              <div className="relative flex items-center gap-2">
+            <div className="p-5 bg-slate-900 border-t border-white/10">
+              <div className="relative flex items-center gap-3">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                   placeholder={language === 'ur' ? 'پیغام لکھیں...' : 'Type a message...'}
-                  className={`flex-1 bg-slate-900 border border-white/10 rounded-2xl px-4 py-3 text-white text-sm focus:outline-none focus:border-sky-500 transition-all ${isRTL ? 'text-right' : 'text-left'}`}
+                  className={`flex-1 bg-slate-950 border border-white/10 rounded-2xl px-5 py-4 text-white text-base focus:outline-none focus:border-sky-500 transition-all ${isRTL ? 'text-right' : 'text-left'}`}
                 />
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || loading}
-                  className="p-3 bg-sky-500 hover:bg-sky-400 disabled:bg-slate-700 text-white rounded-xl transition-all shadow-lg shadow-sky-500/20"
+                  className="p-4 bg-sky-500 hover:bg-sky-400 disabled:bg-slate-800 text-white rounded-2xl transition-all shadow-lg shadow-sky-500/20 flex-shrink-0"
                 >
-                  <Send className="w-5 h-5" />
+                  <Send className="w-6 h-6" />
                 </button>
               </div>
             </div>
