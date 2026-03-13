@@ -6,26 +6,17 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 export const Portfolio = () => {
   const { t, isRTL } = useLanguage();
-  const projects = [
-    {
-      title: t('portfolio.projects.0.title'),
-      result: t('portfolio.projects.0.result'),
-      image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=600&h=400",
-      category: t('portfolio.projects.0.category')
-    },
-    {
-      title: t('portfolio.projects.1.title'),
-      result: t('portfolio.projects.1.result'),
-      image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=600&h=400",
-      category: t('portfolio.projects.1.category')
-    },
-    {
-      title: t('portfolio.projects.2.title'),
-      result: t('portfolio.projects.2.result'),
-      image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=600&h=400",
-      category: t('portfolio.projects.2.category')
-    }
+  const projectData = t('portfolio.projects');
+  const projectImages = [
+    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=600&h=400",
+    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=600&h=400",
+    "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=600&h=400"
   ];
+
+  const projects = Array.isArray(projectData) ? projectData.map((p: any, i: number) => ({
+    ...p,
+    image: p.image || projectImages[i] || projectImages[0]
+  })) : [];
 
   return (
     <section id="portfolio" className="py-24 md:py-32 bg-slate-700 relative overflow-hidden">
@@ -65,26 +56,39 @@ export const Portfolio = () => {
               transition={{ delay: index * 0.1, duration: 0.8 }}
               className="group"
             >
-              <div className="aspect-[4/3] rounded-[40px] overflow-hidden mb-8 border border-white/5 shadow-2xl relative">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
-              <div className={`space-y-4 px-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                <div className={`text-sky-400 text-sm font-black uppercase tracking-[0.2em] flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <div className="w-8 h-[1px] bg-sky-500" />
-                  {project.category}
+              <a 
+                href={project.url || "#"} 
+                target={project.url ? "_blank" : undefined} 
+                rel={project.url ? "noopener noreferrer" : undefined}
+                className={`block cursor-${project.url ? 'pointer' : 'default'}`}
+              >
+                <div className="aspect-[4/3] rounded-[40px] overflow-hidden mb-8 border border-white/5 shadow-2xl relative">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                    {project.url && (
+                      <div className="bg-white/10 backdrop-blur-md p-4 rounded-full border border-white/20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <ExternalLink className="w-8 h-8 text-white" />
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-white group-hover:text-sky-400 transition-colors">{project.title}</h3>
-                <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 text-sky-400 text-sm font-bold border border-sky-500/20 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <div className="w-1.5 h-1.5 bg-sky-500 rounded-full animate-pulse" />
-                  {project.result}
+                <div className={`space-y-4 px-2 ${isRTL ? 'text-right' : 'text-left'}`}>
+                  <div className={`text-sky-400 text-sm font-black uppercase tracking-[0.2em] flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <div className="w-8 h-[1px] bg-sky-500" />
+                    {project.category}
+                  </div>
+                  <h3 className="text-2xl font-bold text-white group-hover:text-sky-400 transition-colors">{project.title}</h3>
+                  <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 text-sky-400 text-sm font-bold border border-sky-500/20 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <div className="w-1.5 h-1.5 bg-sky-500 rounded-full animate-pulse" />
+                    {project.result}
+                  </div>
                 </div>
-              </div>
+              </a>
             </motion.div>
           ))}
         </div>

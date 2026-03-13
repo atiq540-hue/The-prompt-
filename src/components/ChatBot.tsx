@@ -174,29 +174,6 @@ export const ChatBot = () => {
 
   return (
     <div className="fixed bottom-6 left-6 sm:bottom-8 sm:left-8 z-[60] flex flex-col items-start">
-      {/* WhatsApp Floating Button */}
-      <AnimatePresence>
-        {!isOpen && (
-          <motion.a
-            initial={{ opacity: 0, y: 20, scale: 0.5 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.5 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            href="https://wa.me/923278651402"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mb-3 sm:mb-4 p-4 sm:p-5 bg-[#25D366] text-white rounded-[20px] sm:rounded-[24px] shadow-2xl shadow-emerald-500/20 hover:bg-[#22c35e] transition-all relative group flex flex-col items-center gap-1"
-          >
-            <Phone className="w-6 h-6 sm:w-7 h-7" />
-            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest">{language === 'ur' ? 'واٹس ایپ' : 'WhatsApp'}</span>
-            <span className="absolute left-full ml-4 px-4 py-2 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-white/10 pointer-events-none">
-              {language === 'ur' ? 'آرکیٹیکٹ سے بات کریں' : 'Chat with Architect'}
-            </span>
-          </motion.a>
-        )}
-      </AnimatePresence>
-
       <AnimatePresence>
         {isOpen && (
           <motion.div

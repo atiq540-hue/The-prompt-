@@ -112,7 +112,7 @@ export const AIDemo = () => {
             <div className={`aspect-square rounded-[40px] bg-slate-800/50 border-2 border-dashed border-white/10 flex flex-col items-center justify-center relative overflow-hidden group transition-all duration-500 hover:border-sky-500/50`}>
               {image ? (
                 <>
-                  <img src={image} alt="Original" className="w-full h-full object-contain p-4" />
+                  <img src={image} alt="Original" className="w-full h-full object-contain p-4" referrerPolicy="no-referrer" />
                   <label className="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center cursor-pointer text-white backdrop-blur-sm">
                     <div className="w-16 h-16 rounded-full bg-sky-500 flex items-center justify-center mb-4 shadow-xl shadow-sky-500/20">
                       <Upload className="w-8 h-8" />
@@ -179,7 +179,7 @@ export const AIDemo = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   className="w-full h-full relative group p-4"
                 >
-                  <img src={result} alt="Result" className="w-full h-full object-contain rounded-3xl" />
+                  <img src={result} alt="Result" className="w-full h-full object-contain rounded-3xl" referrerPolicy="no-referrer" />
                   <motion.a 
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
