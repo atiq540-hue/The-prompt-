@@ -131,24 +131,6 @@ export const translations: any = {
       error: "AI didn't return an image. Try a different prompt.",
       fail: "Failed to edit image. Please try again."
     },
-    veoAd: {
-      badge: "Cinematic Ads",
-      title: "AI Ad Director",
-      subtitle: "Turn a simple product photo into a high-end 6-second cinematic ad. Powered by Google Veo.",
-      productName: "Product Name",
-      productPlaceholder: "e.g., 'Luxury Watch', 'Artisan Coffee', 'Electric Car'",
-      upload: "Upload Product Photo",
-      generate: "Generate Cinematic Ad",
-      scriptTitle: "The Director's Script",
-      processingScript: "Director is crafting the script...",
-      generatingVideo: "Veo is rendering the cinematic video...",
-      waitingVeo: "This usually takes 1-2 minutes. Please stay on this page.",
-      download: "Download Ad",
-      selectKey: "Select API Key to Start",
-      keyRequired: "A paid Google Cloud API Key is required for Veo video generation.",
-      billingLink: "Learn about billing",
-      error: "Something went wrong. Please try again."
-    },
     footer: {
       tagline: "AI & strategy for hungry small businesses.",
       privacy: "Privacy",
@@ -293,24 +275,6 @@ export const translations: any = {
       geminiProcessing: "Gemini آپ کی درخواست پر کارروائی کر رہا ہے...",
       error: "AI نے تصویر واپس نہیں کی۔ ایک مختلف پرامپٹ آزمائیں۔",
       fail: "تصویر ایڈٹ کرنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔"
-    },
-    veoAd: {
-      badge: "سنیما اشتہارات",
-      title: "AI ایڈ ڈائریکٹر",
-      subtitle: "پروڈکٹ کی ایک سادہ تصویر کو ہائی اینڈ 6 سیکنڈ کے سنیما اشتہار میں تبدیل کریں۔ گوگل ویو (Veo) کے ذریعے تیار کردہ۔",
-      productName: "پروڈکٹ کا نام",
-      productPlaceholder: "مثال کے طور پر، 'لگژری گھڑی'، 'کافی'، 'الیکٹرک کار'",
-      upload: "پروڈکٹ کی تصویر اپ لوڈ کریں",
-      generate: "سنیما اشتہار تیار کریں",
-      scriptTitle: "ڈائریکٹر کا اسکرپٹ",
-      processingScript: "ڈائریکٹر اسکرپٹ تیار کر رہا ہے...",
-      generatingVideo: "ویو (Veo) ویڈیو رینڈر کر رہا ہے...",
-      waitingVeo: "اس میں عام طور پر 1-2 منٹ لگتے ہیں۔ براہ کرم اسی صفحے پر رہیں۔",
-      download: "اشتہار ڈاؤن لوڈ کریں",
-      selectKey: "شروع کرنے کے لیے API Key منتخب کریں",
-      keyRequired: "ویو (Veo) ویڈیو جنریشن کے لیے پیڈ گوگل کلاؤڈ API Key درکار ہے۔",
-      billingLink: "بلنگ کے بارے میں جانیں",
-      error: "کچھ غلط ہو گیا۔ براہ کرم دوبارہ کوشش کریں۔"
     },
     footer: {
       tagline: "چھوٹے کاروباروں کے لیے AI اور حکمت عملی۔",

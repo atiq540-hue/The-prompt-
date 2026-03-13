@@ -14,7 +14,6 @@ import { Scarcity } from './components/Scarcity';
 import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { AIDemo } from './components/AIDemo';
-import { VeoAdGenerator } from './components/VeoAdGenerator';
 import { ChatBot } from './components/ChatBot';
 import { ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
@@ -62,7 +61,6 @@ function AppContent() {
         <Problem />
         <PromiseSection />
         <AIDemo />
-        <VeoAdGenerator />
         <HowItWorks />
         <Benefits />
         <Portfolio />
